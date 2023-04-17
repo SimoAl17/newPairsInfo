@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuova Unità</title>
+    <style>
+        .button{
+            display: flex;
+            clear: both;
+            border: solid 1px;
+        }
+        input:read-only{
+            display: flex;
+            clear: both;
+            border: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="result"></div>
+    <select name="mese" id="selectMese" onchange="createForm(this.value)">
+        <option value=""></option>
+        <option value="Gennaio">Gennaio</option>
+        <option value="Febbraio">Febbraio</option>
+        <option value="Marzo">Marzo</option>
+        <option value="Aprile">Aprile</option>
+        <option value="Maggio">Maggio</option>
+        <option value="Giugno">Giugno</option>
+        <option value="Luglio">Luglio</option>
+        <option value="Agosto">Agosto</option>
+        <option value="Settembre">Settembre</option>
+        <option value="Ottobre">Ottobre</option>
+        <option value="Novembre">Novembre</option>
+        <option value="Dicembre">Dicembre</option>
+    </select>
+    <div id="days"></div>
+    <p id="meseSel" hidden></p>
+    <p id="mesePrev" hidden></p>
+
+    <input class="button" type="button" value="Scrivi" onclick="scrivi()">
+    <script>
+        function createForm(mese) { //Costruzione degli input
+            let meseSel = document.getElementById("meseSel");
+            meseSel.innerHTML = mese; //Salvo il mese corrente
+            let mesePrev = document.getElementById("mesePrev");
+            if (mese == "Gennaio") {
+                mesePrev.innerHTML = "Dicembre";
+            } else {
+                const calendario = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
+                let indiceMese = calendario.indexOf(mese);
+                mesePrev.innerHTML = calendario[indiceMese-1]; //Salvo il mese precedente
+            }
+            let conteniGiorni = document.getElementById("days");
+            while (conteniGiorni.firstChild) {
+                conteniGiorni.removeChild(conteniGiorni.lastChild); //Svuoto il contenitore di giorni prima di riempirlo
+            }
+
+
+            for (let i = 26; i < 32; i++) { //Giorni del mese precedente
+                let conteniGiorno = document.createElement("div");
+                conteniGiorno.setAttribute("class", "giornox");
+
+                let inputID = document.createElement("input"); //Numero giorno
+                inputID.setAttribute("class", "giornoID");
+                inputID.setAttribute("type", "text");
+                inputID.setAttribute("value", i);
+                inputID.readOnly = true;
+                conteniGiorno.appendChild(inputID);
+                for (let z = 0; z < 5; z++) {
+                    let inputID = document.createElement("input"); //Testi dei giorni
+                    inputID.setAttribute("class", "testo");
+                    inputID.setAttribute("type", "text");
+                    conteniGiorno.appendChild(inputID);
+                }
+                conteniGiorni.appendChild(conteniGiorno);
+            }
+
+            for (let i = 1; i < 32; i++) { //Giorni del mese corrente
+                let conteniGiorno = document.createElement("div");
+                conteniGiorno.setAttribute("class", "giorno");
+
+                let inputID = document.createElement("input"); //Numero giorno
+                inputID.setAttribute("class", "giornoID");
+                inputID.setAttribute("type", "text");
+                inputID.setAttribute("value", i);
+                inputID.readOnly = true;
+                conteniGiorno.appendChild(inputID);
+                for (let z = 0; z < 5; z++) {
+                    let inputID = document.createElement("input"); //Testi dei giorni
+                    inputID.setAttribute("class", "testo");
+                    inputID.setAttribute("type", "text");
+                    conteniGiorno.appendChild(inputID);
+                }
+                conteniGiorni.appendChild(conteniGiorno);
+            }
+        }
+        
+        
+        function scrivi() { //Scrittura elenco
+            let resultElement = document.getElementById("result");
+            let meseSel = document.getElementById("meseSel").innerHTML;
+            let mesePrev = document.getElementById("mesePrev").innerHTML;
+
+            resultElement.innerHTML = "";
+            
+            let conteniGiorni = document.getElementById("days");
+            let collecGiorni = conteniGiorni.children;
+            for (let i = 0; i < collecGiorni.length; i++) {
+
+                if (collecGiorni[i].getAttribute("class") == "giornox") { //Lettura mese precedente
+                    let collecEntries = collecGiorni[i].children;
+                    if (collecEntries[1].value != "") {
+                        resultElement.innerHTML += "<b>" + collecEntries[0].value + " " + mesePrev + ":</b><br>";
+                        resultElement.innerHTML += "•" + collecEntries[1].value;
+                        for (let j = 2; j < collecEntries.length; j++) {
+                            if (collecEntries[j].value != "") {
+                                resultElement.innerHTML += ";<br>•" + collecEntries[j].value;
+                            } else {
+                                resultElement.innerHTML += ".<br><br>";
+                                break;
+                            }
+                        }
+                    }
+                } else { //Lettura mese corrente
+                    let collecEntries = collecGiorni[i].children;
+                    if (collecEntries[1].value != "") {
+                        resultElement.innerHTML += "<b>" + collecEntries[0].value + " " + meseSel + ":</b><br>";
+                        resultElement.innerHTML += "•" + collecEntries[1].value;
+                        for (let j = 2; j < collecEntries.length; j++) {
+                            if (collecEntries[j].value != "") {
+                                resultElement.innerHTML += ";<br>•" + collecEntries[j].value;
+                            } else {
+                                resultElement.innerHTML += ".<br><br>";
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
