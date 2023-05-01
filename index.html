@@ -11,134 +11,241 @@
             clear: both;
             border: solid 1px;
         }
-        input:read-only{
-            display: flex;
-            clear: both;
-            border: hidden;
-        }
     </style>
 </head>
 <body>
     <div id="result"></div>
-    <select name="mese" id="selectMese" onchange="createForm(this.value)">
-        <option value=""></option>
-        <option value="Gennaio">Gennaio</option>
-        <option value="Febbraio">Febbraio</option>
-        <option value="Marzo">Marzo</option>
-        <option value="Aprile">Aprile</option>
-        <option value="Maggio">Maggio</option>
-        <option value="Giugno">Giugno</option>
-        <option value="Luglio">Luglio</option>
-        <option value="Agosto">Agosto</option>
-        <option value="Settembre">Settembre</option>
-        <option value="Ottobre">Ottobre</option>
-        <option value="Novembre">Novembre</option>
-        <option value="Dicembre">Dicembre</option>
-    </select>
-    <div id="days"></div>
-    <p id="meseSel" hidden></p>
-    <p id="mesePrev" hidden></p>
+
+    <div id="sheet">
+        <div id="header">
+            <input type="text" placeholder="Allenatore">
+            <select name="costume" id="selectCostume">
+                <option value="&">&</option>
+                <option value="Costumax &">Costumax &</option>
+                <option value="(seasonal) &">(seasonal) &</option>
+                <option value="(costume) &">(costume) &</option>
+                <option value="(campione) &">(campione) &</option>
+                <option value="(campionessa) &">(campionessa) &</option>
+            </select>
+            <input type="text" id="pokemon" placeholder="Pokémon">
+            <input type="text" value=","hidden>
+            <select name="role" id="selectRole">
+                <option value="Attaccante Fisico">Attaccante Fisico</option>
+                <option value="Attaccante Speciale">Attaccante Speciale</option>
+                <option value="Tech">Tech</option>
+                <option value="Support">Support</option>
+            </select>
+            <select name="type" id="selectType">
+                <option value="Acciaio">Acciaio</option>
+                <option value="Acqua">Acqua</option>
+                <option value="Buio">Buio</option>
+                <option value="Coleottero">Coleottero</option>
+                <option value="Drago">Drago</option>
+                <option value="Elettro">Elettro</option>
+                <option value="Erba">Erba</option>
+                <option value="Folletto">Folletto</option>
+                <option value="Fuoco">Fuoco</option>
+                <option value="Ghiaccio">Ghiaccio</option>
+                <option value="Lotta">Lotta</option>
+                <option value="Normale">Normale</option>
+                <option value="Psico">Psico</option>
+                <option value="Roccia">Roccia</option>
+                <option value="Spettro">Spettro</option>
+                <option value="Terra">Terra</option>
+                <option value="Veleno">Veleno</option>
+                <option value="Volante">Volante</option>
+            </select>
+            <select name="stars" id="selectStars">
+                <option value="5*">5*</option>
+                <option value="4*">4*</option>
+                <option value="3*">3*</option>
+            </select>
+            <input type="text" id="weakness" hidden>
+            <select name="type" id="selectType">
+                <option value="Acciaio">Acciaio</option>
+                <option value="Acqua">Acqua</option>
+                <option value="Buio">Buio</option>
+                <option value="Coleottero">Coleottero</option>
+                <option value="Drago">Drago</option>
+                <option value="Elettro">Elettro</option>
+                <option value="Erba">Erba</option>
+                <option value="Folletto">Folletto</option>
+                <option value="Fuoco">Fuoco</option>
+                <option value="Ghiaccio">Ghiaccio</option>
+                <option value="Lotta">Lotta</option>
+                <option value="Normale">Normale</option>
+                <option value="Psico">Psico</option>
+                <option value="Roccia">Roccia</option>
+                <option value="Spettro">Spettro</option>
+                <option value="Terra">Terra</option>
+                <option value="Veleno">Veleno</option>
+                <option value="Volante">Volante</option>
+            </select>
+        </div>
+        <div id="stats">
+            <div id="140div">
+                <label id="140">140:</label>
+                <input type="text" class="PS" size="2" placeholder="PS">
+                <input type="text" class="ATT" size="2" placeholder="ATT">
+                <input type="text" class="DIF" size="2" placeholder="DIF">
+                <input type="text" class="ATTSP" size="3" placeholder="ATTSP">
+                <input type="text" class="DIFSP" size="3" placeholder="DIFSP">
+                <input type="text" class="VEL" size="2" placeholder="VEL">
+            </div>
+            <div id="6exdiv">
+                <label id="6ex">6EX:</label>
+                <input type="text" class="PS" size="2" placeholder="PS">
+                <input type="text" class="ATT" size="2" placeholder="ATT">
+                <input type="text" class="DIF" size="2" placeholder="DIF">
+                <input type="text" class="ATTSP" size="3" placeholder="ATTSP">
+                <input type="text" class="DIFSP" size="3" placeholder="DIFSP">
+                <input type="text" class="VEL" size="2" placeholder="VEL">
+            </div>
+            <div id="megadiv">
+                <label id="mega">Mega:</label>
+                <input type="text" class="PS" size="2" placeholder="PS" readonly>
+                <input type="text" class="ATT" size="2" placeholder="ATT">
+                <input type="text" class="DIF" size="2" placeholder="DIF">
+                <input type="text" class="ATTSP" size="3" placeholder="ATTSP">
+                <input type="text" class="DIFSP" size="3" placeholder="DIFSP">
+                <input type="text" class="VEL" size="2" placeholder="VEL">
+            </div>
+        </div>
+        <div id="moves">
+            <div id="move1">
+                <input type="text" placeholder="Nome mossa">
+                <input type="text" placeholder="Pot" size="1">
+                <input type="text" placeholder="Prec" size="1">
+                <input type="text" placeholder="Barr" size="1">
+                <select>
+                    <option value=""></option>
+                    <option value="AoE">AoE</option>
+                </select>
+                <input type="text" placeholder="Descrizione">
+                <input type="text" placeholder="Attiva">
+                <input type="text" placeholder="Disattiva">
+                <input type="text" placeholder="Util" size="1">
+            </div>
+            <div id="move2">
+                <input type="text" placeholder="Nome mossa">
+                <input type="text" placeholder="Pot" size="1">
+                <input type="text" placeholder="Prec" size="1">
+                <input type="text" placeholder="Barr" size="1">
+                <select>
+                    <option value=""></option>
+                    <option value="AoE">AoE</option>
+                </select>
+                <input type="text" placeholder="Descrizione">
+                <input type="text" placeholder="Attiva">
+                <input type="text" placeholder="Disattiva">
+                <input type="text" placeholder="Util" size="1">
+            </div>
+            <div id="move3">
+                <input type="text" placeholder="Nome mossa">
+                <input type="text" placeholder="Pot" size="1">
+                <input type="text" placeholder="Prec" size="1">
+                <input type="text" placeholder="Barr" size="1">
+                <select>
+                    <option value=""></option>
+                    <option value="AoE">AoE</option>
+                </select>
+                <input type="text" placeholder="Descrizione">
+                <input type="text" placeholder="Attiva">
+                <input type="text" placeholder="Disattiva">
+                <input type="text" placeholder="Util" size="1">
+            </div>
+            <div id="move4">
+                <input type="text" placeholder="Nome mossa">
+                <input type="text" placeholder="Pot" size="1">
+                <input type="text" placeholder="Prec" size="1">
+                <input type="text" placeholder="Barr" size="1">
+                <select>
+                    <option value=""></option>
+                    <option value="AoE">AoE</option>
+                </select>
+                <input type="text" placeholder="Descrizione">
+                <input type="text" placeholder="Attiva">
+                <input type="text" placeholder="Disattiva">
+                <input type="text" placeholder="Util" size="1">
+            </div>
+        </div>
+    </div>
+   
 
     <input class="button" type="button" value="Scrivi" onclick="scrivi()">
     <script>
-        function createForm(mese) { //Costruzione degli input
-            let meseSel = document.getElementById("meseSel");
-            meseSel.innerHTML = mese; //Salvo il mese corrente
-            let mesePrev = document.getElementById("mesePrev");
-            if (mese == "Gennaio") {
-                mesePrev.innerHTML = "Dicembre";
-            } else {
-                const calendario = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
-                let indiceMese = calendario.indexOf(mese);
-                mesePrev.innerHTML = calendario[indiceMese-1]; //Salvo il mese precedente
-            }
-            let conteniGiorni = document.getElementById("days");
-            while (conteniGiorni.firstChild) {
-                conteniGiorni.removeChild(conteniGiorni.lastChild); //Svuoto il contenitore di giorni prima di riempirlo
-            }
-
-
-            for (let i = 26; i < 32; i++) { //Giorni del mese precedente
-                let conteniGiorno = document.createElement("div");
-                conteniGiorno.setAttribute("class", "giornox");
-
-                let inputID = document.createElement("input"); //Numero giorno
-                inputID.setAttribute("class", "giornoID");
-                inputID.setAttribute("type", "text");
-                inputID.setAttribute("value", i);
-                inputID.readOnly = true;
-                conteniGiorno.appendChild(inputID);
-                for (let z = 0; z < 5; z++) {
-                    let inputID = document.createElement("input"); //Testi dei giorni
-                    inputID.setAttribute("class", "testo");
-                    inputID.setAttribute("type", "text");
-                    conteniGiorno.appendChild(inputID);
-                }
-                conteniGiorni.appendChild(conteniGiorno);
-            }
-
-            for (let i = 1; i < 32; i++) { //Giorni del mese corrente
-                let conteniGiorno = document.createElement("div");
-                conteniGiorno.setAttribute("class", "giorno");
-
-                let inputID = document.createElement("input"); //Numero giorno
-                inputID.setAttribute("class", "giornoID");
-                inputID.setAttribute("type", "text");
-                inputID.setAttribute("value", i);
-                inputID.readOnly = true;
-                conteniGiorno.appendChild(inputID);
-                for (let z = 0; z < 5; z++) {
-                    let inputID = document.createElement("input"); //Testi dei giorni
-                    inputID.setAttribute("class", "testo");
-                    inputID.setAttribute("type", "text");
-                    conteniGiorno.appendChild(inputID);
-                }
-                conteniGiorni.appendChild(conteniGiorno);
-            }
-        }
         
         
-        function scrivi() { //Scrittura elenco
-            let resultElement = document.getElementById("result");
-            let meseSel = document.getElementById("meseSel").innerHTML;
-            let mesePrev = document.getElementById("mesePrev").innerHTML;
-
-            resultElement.innerHTML = "";
+        function scrivi() { //Scrittura scheda
             
-            let conteniGiorni = document.getElementById("days");
-            let collecGiorni = conteniGiorni.children;
-            for (let i = 0; i < collecGiorni.length; i++) {
+            let resultElement = document.getElementById('result');
+            resultElement.innerHTML = "";
 
-                if (collecGiorni[i].getAttribute("class") == "giornox") { //Lettura mese precedente
-                    let collecEntries = collecGiorni[i].children;
-                    if (collecEntries[1].value != "") {
-                        resultElement.innerHTML += "<b>" + collecEntries[0].value + " " + mesePrev + ":</b><br>";
-                        resultElement.innerHTML += "•" + collecEntries[1].value;
-                        for (let j = 2; j < collecEntries.length; j++) {
-                            if (collecEntries[j].value != "") {
-                                resultElement.innerHTML += ";<br>•" + collecEntries[j].value;
-                            } else {
-                                resultElement.innerHTML += ".<br><br>";
-                                break;
-                            }
-                        }
+            let collecHeader = document.getElementById('header').children;
+            for (let i = 0; i < collecHeader.length; i++) {
+                if (collecHeader[i].id == "pokemon") {
+                    resultElement.innerHTML += "<b>" + collecHeader[i].value + "</b>";
+                    continue;
+                }
+                if (collecHeader[i].id == "weakness") {
+                    resultElement.innerHTML += "<br><b>Debolezza:</b>";
+                    continue;
+                }
+                resultElement.innerHTML += collecHeader[i].value + " ";
+            }
+
+            resultElement.innerHTML += "<br><br>";
+
+            let collec140Stats = document.getElementById('140div').children;
+            for (let i = 0; i < collec140Stats.length; i++) {
+                if (collec140Stats[i].id == "140") {
+                    resultElement.innerHTML += "<b>140: </b>";
+                    continue;
+                }
+                if (collec140Stats[i].className != "VEL") {
+                    resultElement.innerHTML += collec140Stats[i].value + "/";
+                    continue;
+                }
+                resultElement.innerHTML += collec140Stats[i].value + "<br>";  
+            }
+            
+            let collec6EXStats = document.getElementById('6exdiv').children;
+            if (collec6EXStats[1].value != "") {
+                for (let i = 0; i < collec6EXStats.length; i++) {
+                if (collec6EXStats[i].id == "6ex") {
+                    resultElement.innerHTML += "<b>6EX: </b>";
+                    continue;
+                }
+                if (collec6EXStats[i].className != "VEL") {
+                    resultElement.innerHTML += collec6EXStats[i].value + "/";
+                    continue;
+                }
+                resultElement.innerHTML += collec6EXStats[i].value + "<br>";  
+                }    
+            }
+            
+            let collecMegaStats = document.getElementById('megadiv').children;
+            let checkMegaContent = "";
+            for (let i = 1; i < collecMegaStats.length; i++) {
+                checkMegaContent += collecMegaStats[i].value;
+            }
+            if (checkMegaContent != "") {
+                let megaString = "";
+                for (let i = 0; i < collecMegaStats.length; i++) {
+                    if (collecMegaStats[i].id == "mega") {
+                        megaString += "<b>Mega: </b>";
+                        continue;
                     }
-                } else { //Lettura mese corrente
-                    let collecEntries = collecGiorni[i].children;
-                    if (collecEntries[1].value != "") {
-                        resultElement.innerHTML += "<b>" + collecEntries[0].value + " " + meseSel + ":</b><br>";
-                        resultElement.innerHTML += "•" + collecEntries[1].value;
-                        for (let j = 2; j < collecEntries.length; j++) {
-                            if (collecEntries[j].value != "") {
-                                resultElement.innerHTML += ";<br>•" + collecEntries[j].value;
-                            } else {
-                                resultElement.innerHTML += ".<br><br>";
-                                break;
-                            }
-                        }
+                    if (collecMegaStats[i].value != "") {
+                        megaString += collecMegaStats[i].className + " " + collecMegaStats[i].value + ", ";
+                        continue;
                     }
                 }
+                megaString = megaString.substring(0, megaString.length -2);
+                resultElement.innerHTML += megaString;
             }
+        
+
         }
     </script>
 </body>
